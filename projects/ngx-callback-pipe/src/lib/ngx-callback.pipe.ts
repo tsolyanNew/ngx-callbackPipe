@@ -5,9 +5,8 @@ import { PipeTransform } from '@angular/core';
     pure: true
 })
 export class NgxCallbackPipe implements PipeTransform {
-    public transform(fnReference: Function, value: any, ...fnArguments: any[]): any {
-        fnArguments.unshift(value);
-        return fnReference.apply(null, fnArguments);
+    public transform(value: unknown,fnReference: Function = () => {},  ...fnArguments: unknown[]): unknown {
+        return fnReference.apply(null, [value, ...fnArguments]);
       }
     
 }
